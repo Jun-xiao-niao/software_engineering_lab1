@@ -43,6 +43,7 @@ public class Main {
                 findKey(Cfile);
                 findSwitchAndCase(Cfile);
                 processElse(Cfile,3);
+                break;
             case 4:
                 findKey(Cfile);
                 findSwitchAndCase(Cfile);
