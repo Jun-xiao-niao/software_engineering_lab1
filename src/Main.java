@@ -18,36 +18,36 @@ public class Main {
 
         //Completion Level: You can enter 4
         System.out.println("Please input the completion level (from low to high as 1, 2, 3, 4 )");
-        //int level = 4;
+        //int level = 1;
         int level = scanner.nextInt();
 
         //Read the file
         BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
-        String Cfile = "";
+        StringBuilder Cfile = new StringBuilder();
         String line = bufferedReader.readLine();
         while (line != null) {
-            Cfile += line;
+            Cfile.append(line);
             line = bufferedReader.readLine();
         }
 
         //Judge requirements
         switch (level) {
             case 1:
-                findKey(Cfile);
+                findKey(Cfile.toString());
                 break;
             case 2:
-                findKey(Cfile);
-                findSwitchAndCase(Cfile);
+                findKey(Cfile.toString());
+                findSwitchAndCase(Cfile.toString());
                 break;
             case 3:
-                findKey(Cfile);
-                findSwitchAndCase(Cfile);
-                processElse(Cfile,3);
+                findKey(Cfile.toString());
+                findSwitchAndCase(Cfile.toString());
+                checkIfElse(Cfile.toString(),3);
                 break;
             case 4:
-                findKey(Cfile);
-                findSwitchAndCase(Cfile);
-                processElse(Cfile,4);
+                findKey(Cfile.toString());
+                findSwitchAndCase(Cfile.toString());
+                checkIfElse(Cfile.toString(),4);
                 break;
         }
 
@@ -84,13 +84,13 @@ public class Main {
             int caseNum = cases.length - 1;
             System.out.print(" " + caseNum);
         }
-        System.out.println("");
+        System.out.println();
     }
 
-    public static void processElse(String code,int level) {
+    public static void checkIfElse(String code, int level) {
         Pattern p = Pattern.compile("if|else if|else");
         Matcher matcher = p.matcher(code);
-        Stack<String> stack = new Stack();
+        Stack<String> stack = new Stack<>();
         int ifElse = 0;
         int ifElseIf = 0;
         boolean checkElseIf = false;
@@ -108,7 +108,7 @@ public class Main {
                     if(s.equals("else if")){
                         checkElseIf = true;
                     }else{ // s == "if"
-                        if(checkElseIf == true){
+                        if(checkElseIf){
                             ifElseIf++;
                             checkElseIf = false;
                         }else{
